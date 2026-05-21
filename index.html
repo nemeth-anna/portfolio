@@ -1,0 +1,1093 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Németh Anna – Építész portfólió</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --grafit: #303030;
+      --akcent: #A0A0A0;
+      --hatter: #F9F8F6;
+      --border: #E0DEDD;
+      --muted:  #787878;
+      --tinta:  #1A1A1A;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      background: var(--hatter);
+      color: var(--grafit);
+      font-size: 14px;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    img { max-width: 100%; display: block; }
+    a   { color: inherit; text-decoration: none; }
+
+    /* ── Nav ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      height: 60px;
+      background: var(--hatter);
+      border-bottom: 0.5px solid var(--border);
+      display: flex; align-items: center;
+      padding: 0 5vw;
+      transition: transform 0.3s ease;
+    }
+    nav.hidden { transform: translateY(-100%); }
+
+    .nav-inner { width: 100%; display: flex; align-items: center; justify-content: space-between; }
+
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 18px; font-weight: 400; letter-spacing: 0.02em;
+      cursor: pointer;
+    }
+
+    .nav-links { display: flex; gap: 40px; list-style: none; }
+    .nav-links a {
+      font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase;
+      font-weight: 400; transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--akcent); }
+
+    .nav-hamburger {
+      display: none; flex-direction: column; gap: 5px;
+      cursor: pointer; padding: 4px;
+    }
+    .nav-hamburger span {
+      display: block; width: 22px; height: 1px;
+      background: var(--grafit); transition: all 0.3s;
+    }
+
+    .mobile-menu {
+      display: none; position: fixed;
+      top: 60px; left: 0; right: 0;
+      background: var(--hatter);
+      border-bottom: 0.5px solid var(--border);
+      padding: 24px 5vw; z-index: 99;
+      flex-direction: column; gap: 20px;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a { font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; }
+
+    /* ── Hero ── */
+    .hero {
+      display: grid; grid-template-columns: 55% 45%;
+      min-height: 100vh; padding-top: 60px;
+    }
+
+    .hero-left {
+      background: var(--grafit);
+      position: relative; overflow: hidden;
+    }
+    .hero-left img.makett-img {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: center top;
+      mix-blend-mode: multiply;
+    }
+    .hero-left-label {
+      position: absolute; bottom: 32px; left: 32px; right: 32px;
+    }
+    .hero-left-label .lbl-eye {
+      font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase;
+      color: rgba(249,248,246,0.40); margin-bottom: 4px;
+    }
+    .hero-left-label .lbl-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic; font-size: 16px; font-weight: 300;
+      color: rgba(249,248,246,0.55);
+    }
+
+    .hero-right {
+      background: var(--hatter);
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 80px 10% 80px 8%;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero-eye {
+      font-size: 14px; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--akcent); margin-bottom: 20px;
+      opacity: 0; animation: fadeUp 0.8s ease 0.1s forwards;
+    }
+    .hero-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(58px, 6.5vw, 90px); font-weight: 300;
+      line-height: 1.05; color: var(--grafit); margin-bottom: 28px;
+      opacity: 0; animation: fadeUp 0.8s ease 0.2s forwards;
+    }
+    .hero-name em { font-style: italic; font-weight: 300; }
+
+    .hero-tagline {
+      border-left: 1.5px solid var(--border);
+      padding-left: 16px;
+      font-size: 18px; font-weight: 300; color: var(--muted);
+      line-height: 1.8; max-width: 340px; margin-bottom: 48px;
+      opacity: 0; animation: fadeUp 0.8s ease 0.35s forwards;
+    }
+
+    .hero-cta {
+      display: flex; align-items: center; gap: 16px;
+      cursor: pointer; width: fit-content;
+      opacity: 0; animation: fadeUp 0.8s ease 0.5s forwards;
+    }
+    .hero-cta-line { width: 40px; height: 0.5px; background: var(--grafit); transition: background 0.2s; }
+    .hero-cta-text {
+      font-size: 14px; letter-spacing: 0.18em; text-transform: uppercase;
+      font-weight: 400; transition: color 0.2s;
+    }
+    .hero-cta:hover .hero-cta-text { color: var(--akcent); }
+    .hero-cta:hover .hero-cta-line  { background: var(--akcent); }
+
+    /* ── Projektek ── */
+    .sec-projektek { padding: 100px 5vw; }
+
+    .sec-header {
+      display: flex; align-items: flex-end;
+      justify-content: space-between; flex-wrap: wrap;
+      gap: 20px; margin-bottom: 48px;
+    }
+    .sec-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 36px; font-weight: 300;
+    }
+
+    .filter-bar { display: flex; gap: 8px; flex-wrap: wrap; }
+    .filter-btn {
+      font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;
+      padding: 7px 14px; border: 0.5px solid var(--border);
+      background: transparent; color: var(--muted);
+      cursor: pointer; font-family: 'DM Sans', sans-serif; font-weight: 400;
+      transition: all 0.2s;
+    }
+    .filter-btn:hover, .filter-btn.active {
+      background: var(--grafit); color: var(--hatter); border-color: var(--grafit);
+    }
+
+    /* Masonry */
+    .masonry { column-count: 3; column-gap: 16px; }
+
+    .card {
+      break-inside: avoid; margin-bottom: 16px;
+      position: relative; overflow: hidden;
+      cursor: pointer; background: #e0dfdd;
+      opacity: 0; transform: translateY(20px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    .card.vis { opacity: 1; transform: translateY(0); }
+
+    .card-img-wrap { position: relative; overflow: hidden; }
+
+    .card-img {
+      width: 100%; display: block;
+      object-fit: cover; object-position: center;
+      transition: transform 0.5s ease;
+    }
+    .card-img-wrap.no-img { min-height: 220px; background: var(--grafit); }
+
+    .card:hover .card-img { transform: scale(1.04); }
+
+    .card-overlay {
+      position: absolute; inset: 0;
+      background: rgba(26,26,26,0.72);
+      opacity: 0; transition: opacity 0.35s ease;
+      display: flex; flex-direction: column;
+      justify-content: flex-end; padding: 20px;
+    }
+    .card:hover .card-overlay { opacity: 1; }
+    .card-ov-cat {
+      font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--akcent); margin-bottom: 4px;
+    }
+    .card-ov-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic; font-size: 20px; font-weight: 300; color: var(--hatter);
+    }
+
+    .card-pdf-badge {
+      position: absolute; top: 12px; left: 12px;
+      background: rgba(249,248,246,0.92); color: var(--grafit);
+      font-size: 8px; letter-spacing: 0.12em; text-transform: uppercase;
+      padding: 4px 8px; font-family: 'DM Sans', sans-serif; font-weight: 400;
+      pointer-events: none;
+    }
+
+    /* ── Modal backdrop ── */
+    .backdrop {
+      position: fixed; inset: 0;
+      background: rgba(20,20,20,0.80);
+      z-index: 200; display: none;
+      align-items: center; justify-content: center;
+      padding: 20px;
+    }
+    .backdrop.open { display: flex; }
+
+    .modal {
+      background: var(--hatter);
+      width: 100%; max-width: 960px;
+      max-height: 90vh; overflow: hidden;
+      position: relative;
+    }
+
+    /* Split view */
+    #splitView {
+      display: grid; grid-template-columns: 1fr 1fr;
+      height: min(80vh, 640px);
+    }
+
+    .m-img-panel {
+      background: var(--grafit);
+      position: relative; overflow: hidden;
+    }
+    .m-main-img {
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: center; display: block;
+    }
+    .m-img-ph { width: 100%; height: 100%; background: var(--grafit); }
+
+    .m-img-nav {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      width: 100%; display: flex; justify-content: space-between;
+      padding: 0 12px; pointer-events: none;
+    }
+    .m-img-nav button {
+      pointer-events: all;
+      background: rgba(249,248,246,0.12); border: none;
+      color: var(--hatter); font-size: 16px;
+      width: 34px; height: 34px; cursor: pointer;
+      transition: background 0.2s; display: flex;
+      align-items: center; justify-content: center;
+    }
+    .m-img-nav button:hover { background: rgba(249,248,246,0.25); }
+
+    .m-dots {
+      position: absolute; bottom: 14px; left: 50%; transform: translateX(-50%);
+      display: flex; gap: 6px;
+    }
+    .m-dot {
+      height: 2px; width: 12px;
+      background: rgba(160,160,160,0.45);
+      cursor: pointer; transition: all 0.2s;
+    }
+    .m-dot.act { width: 22px; background: var(--akcent); }
+
+    .m-expand {
+      position: absolute; top: 12px; right: 12px;
+      background: rgba(249,248,246,0.12); border: none;
+      color: var(--hatter); width: 30px; height: 30px;
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+      font-size: 12px; opacity: 0; transition: opacity 0.2s;
+    }
+    .m-img-panel:hover .m-expand { opacity: 1; }
+
+    .m-info {
+      background: var(--hatter);
+      padding: 28px; overflow-y: auto;
+      position: relative; display: flex; flex-direction: column;
+    }
+    .m-close {
+      position: absolute; top: 14px; right: 14px;
+      background: none; border: none; font-size: 20px;
+      cursor: pointer; color: var(--muted); line-height: 1;
+      transition: color 0.2s; z-index: 2;
+    }
+    .m-close:hover { color: var(--grafit); }
+
+    .m-cat-row {
+      display: flex; align-items: center; gap: 8px; margin-bottom: 10px;
+    }
+    .m-cat-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--akcent); }
+    .m-cat-lbl { font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--akcent); }
+    .m-year    { font-size: 9px; letter-spacing: 0.12em; color: var(--muted); margin-left: auto; }
+
+    .m-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic; font-size: 26px; font-weight: 300;
+      color: var(--grafit); margin-bottom: 18px; padding-right: 28px;
+    }
+    .m-desc {
+      font-size: 12px; font-weight: 300; line-height: 1.9;
+      color: var(--muted); margin-bottom: 20px; flex-grow: 1;
+    }
+    .m-pdf-inline {
+      color: var(--grafit); text-decoration: underline;
+      cursor: pointer; display: inline-flex; align-items: center; gap: 4px;
+    }
+    .m-pdf-inline:hover { color: var(--akcent); }
+
+    .m-meta {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 12px 16px;
+      border-top: 0.5px solid var(--border); padding-top: 16px; margin-bottom: 16px;
+    }
+    .m-meta-item label {
+      display: block; font-size: 8px; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--akcent); margin-bottom: 3px;
+    }
+    .m-meta-item span { font-size: 11px; font-weight: 300; color: var(--grafit); }
+
+    .m-thumbs {
+      display: flex; gap: 6px; overflow-x: auto; padding-bottom: 4px;
+      margin-bottom: 16px; scrollbar-width: none;
+    }
+    .m-thumbs::-webkit-scrollbar { display: none; }
+    .m-thumb {
+      flex-shrink: 0; width: 52px; height: 38px;
+      object-fit: cover; object-position: center;
+      cursor: pointer; opacity: 0.5; transition: opacity 0.2s;
+      border: 0.5px solid transparent;
+    }
+    .m-thumb.act, .m-thumb:hover { opacity: 1; border-color: var(--akcent); }
+    .m-thumb-ph {
+      flex-shrink: 0; width: 52px; height: 38px;
+      background: #555; cursor: pointer; opacity: 0.5;
+    }
+
+    .m-footer {
+      display: flex; align-items: center; justify-content: space-between;
+      border-top: 0.5px solid var(--border); padding-top: 12px;
+    }
+    .m-pdf-btn {
+      font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase;
+      padding: 8px 16px; border: 0.5px solid var(--grafit);
+      background: transparent; color: var(--grafit);
+      cursor: pointer; font-family: 'DM Sans', sans-serif; font-weight: 400;
+      transition: all 0.2s;
+    }
+    .m-pdf-btn:hover { background: var(--grafit); color: var(--hatter); }
+
+    .m-nav-btns { display: flex; gap: 8px; }
+    .m-nav-btns button {
+      font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase;
+      padding: 8px 14px; border: 0.5px solid var(--border);
+      background: transparent; color: var(--muted);
+      cursor: pointer; font-family: 'DM Sans', sans-serif; transition: all 0.2s;
+    }
+    .m-nav-btns button:hover { border-color: var(--grafit); color: var(--grafit); }
+
+    /* Gallery view */
+    #lbView {
+      display: none; flex-direction: column;
+      background: var(--tinta); height: min(80vh, 640px);
+    }
+    .lb-img-wrap {
+      flex: 1; position: relative;
+      display: flex; align-items: center; justify-content: center; overflow: hidden;
+    }
+    .lb-main-img { max-width: 100%; max-height: 100%; object-fit: contain; }
+    .lb-img-ph { width: 100%; height: 100%; background: #222; }
+    .lb-nav {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      width: 100%; display: flex; justify-content: space-between;
+      padding: 0 16px; pointer-events: none;
+    }
+    .lb-nav button {
+      pointer-events: all;
+      background: rgba(249,248,246,0.08); border: none;
+      color: rgba(249,248,246,0.7); font-size: 18px;
+      width: 40px; height: 40px; cursor: pointer;
+      transition: background 0.2s; display: flex;
+      align-items: center; justify-content: center;
+    }
+    .lb-nav button:hover { background: rgba(249,248,246,0.18); }
+    .lb-bar {
+      background: var(--tinta); border-top: 0.5px solid rgba(255,255,255,0.08);
+      padding: 10px 20px; display: flex; align-items: center;
+    }
+    .lb-back {
+      font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase;
+      color: rgba(249,248,246,0.5); background: none; border: none;
+      cursor: pointer; font-family: 'DM Sans', sans-serif;
+      transition: color 0.2s; flex: 1;
+    }
+    .lb-back:hover { color: rgba(249,248,246,0.9); }
+    .lb-dots { display: flex; gap: 6px; flex: 1; justify-content: center; }
+    .lb-dot {
+      height: 2px; width: 12px;
+      background: rgba(160,160,160,0.35); cursor: pointer; transition: all 0.2s;
+    }
+    .lb-dot.act { width: 22px; background: var(--akcent); }
+    .lb-counter { font-size: 9px; letter-spacing: 0.12em; color: rgba(160,160,160,0.6); flex: 1; text-align: right; }
+
+    /* PDF view */
+    #pdfView { display: none; flex-direction: column; height: min(80vh, 640px); }
+    .pdf-hdr {
+      background: var(--grafit); padding: 12px 20px;
+      display: flex; align-items: center; justify-content: space-between; flex-shrink: 0;
+    }
+    .pdf-hdr-left { display: flex; align-items: center; gap: 12px; }
+    .pdf-back, .pdf-dl {
+      font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase;
+      color: rgba(249,248,246,0.55); background: none; border: none;
+      cursor: pointer; font-family: 'DM Sans', sans-serif; transition: color 0.2s;
+    }
+    .pdf-back:hover, .pdf-dl:hover { color: var(--hatter); }
+    .pdf-fname { font-size: 10px; letter-spacing: 0.08em; color: rgba(249,248,246,0.40); }
+    .pdf-frame-wrap { flex: 1; overflow: hidden; }
+    #pdfFrame { width: 100%; height: 100%; border: none; }
+
+    /* ── Rólam ── */
+    .sec-rolam { background: var(--grafit); padding: 100px 5vw; }
+    .rolam-inner {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 80px;
+      align-items: center; max-width: 1100px; margin: 0 auto;
+    }
+    .rolam-eye {
+      font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
+      color: rgba(160,160,160,0.6); margin-bottom: 16px;
+    }
+    .rolam-heading {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 42px; font-weight: 300; color: var(--hatter);
+      margin-bottom: 28px; line-height: 1.1;
+    }
+    .rolam-heading em { font-style: italic; }
+    .rolam-body {
+      font-size: 13px; font-weight: 300; line-height: 1.9;
+      color: var(--akcent); margin-bottom: 32px;
+    }
+    .rolam-body p + p { margin-top: 14px; }
+    .rolam-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+    .rolam-tag {
+      font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase;
+      padding: 6px 12px; border: 0.5px solid rgba(160,160,160,0.3); color: var(--akcent);
+    }
+    .rolam-photo {
+      width: 100%; aspect-ratio: 3/4;
+      object-fit: cover; object-position: center;
+    }
+    .rolam-photo-ph { width: 100%; aspect-ratio: 3/4; background: #3c3c3c; }
+
+    /* ── Kapcsolat ── */
+    .sec-kapcsolat {
+      padding: 100px 5vw; background: var(--hatter); text-align: center;
+    }
+    .kap-eye {
+      font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--akcent); margin-bottom: 20px;
+    }
+    .kap-heading {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic; font-size: 46px; font-weight: 300;
+      color: var(--grafit); margin-bottom: 32px; line-height: 1.1;
+    }
+    .kap-email {
+      font-size: 14px; font-weight: 300; color: var(--grafit);
+      text-decoration: underline; text-underline-offset: 4px;
+      letter-spacing: 0.02em; transition: color 0.2s;
+    }
+    .kap-email:hover { color: var(--akcent); }
+
+    /* ── Footer ── */
+    footer {
+      border-top: 0.5px solid var(--border); padding: 20px 5vw;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .ft-copy, .ft-sub { font-size: 10px; letter-spacing: 0.1em; color: var(--muted); }
+
+    /* ── Responsive ── */
+    @media (max-width: 900px) {
+      .masonry { column-count: 2; }
+      #splitView { grid-template-columns: 1fr; height: auto; max-height: none; }
+      .m-img-panel { height: 280px; }
+      .rolam-inner { grid-template-columns: 1fr; gap: 40px; }
+      #lbView, #pdfView { height: 80vh; }
+    }
+    @media (max-width: 640px) {
+      .hero { grid-template-columns: 1fr; min-height: auto; }
+      .hero-left { height: 60vw; min-height: 260px; }
+      .hero-right { padding: 48px 7%; }
+      .masonry { column-count: 1; }
+      .nav-links { display: none; }
+      .nav-hamburger { display: flex; }
+      .sec-header { flex-direction: column; align-items: flex-start; }
+      .modal { max-height: 95vh; }
+      .rolam-photo, .rolam-photo-ph { aspect-ratio: 4/3; }
+      footer { flex-direction: column; gap: 6px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAVIGÁCIÓ -->
+<nav id="mainNav">
+  <div class="nav-inner">
+    <a class="nav-logo" href="#hero">Németh Anna</a>
+    <ul class="nav-links">
+      <li><a href="#projektek">Projektek</a></li>
+      <li><a href="#rolam">Rólam</a></li>
+      <li><a href="#kapcsolat">Kapcsolat</a></li>
+    </ul>
+    <div class="nav-hamburger" id="hamburger" aria-label="Menü">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#projektek" onclick="closeMM()">Projektek</a>
+  <a href="#rolam"     onclick="closeMM()">Rólam</a>
+  <a href="#kapcsolat" onclick="closeMM()">Kapcsolat</a>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-left">
+    <img class="makett-img" src="assets/hero_makett.png"
+         alt="Kiemelt makett fotó" loading="eager"
+         onerror="this.style.display='none'">
+    <div class="hero-left-label">
+      <div class="lbl-eye">Kiemelt projekt</div>
+      <div class="lbl-title">Makett, 2025</div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <p class="hero-eye">Építész mérnök hallgató · Budapest</p>
+    <h1 class="hero-name"><em>Németh</em><br>Anna</h1>
+    <p class="hero-tagline">Teret adni az életnek.<br>Ahol a forma találkozik az érzéssel<br>Anyag, fény, ember.</p>
+    <a class="hero-cta" href="#projektek">
+      <span class="hero-cta-line"></span>
+      <span class="hero-cta-text">Munkáim</span>
+    </a>
+  </div>
+</section>
+
+<!-- PROJEKTEK -->
+<section class="sec-projektek" id="projektek">
+  <div class="sec-header">
+    <h2 class="sec-title">Munkáim</h2>
+    <div class="filter-bar" role="group" aria-label="Kategória szűrő">
+      <button class="filter-btn active" data-f="minden">Minden</button>
+      <button class="filter-btn" data-f="Stúdióterv">Stúdióterv</button>
+      <button class="filter-btn" data-f="Látványterv">Látványterv</button>
+      <button class="filter-btn" data-f="Makett">Makett</button>
+      <button class="filter-btn" data-f="Rajz">Rajz</button>
+      <button class="filter-btn" data-f="Plakát">Plakát</button>
+    </div>
+  </div>
+  <div class="masonry" id="grid"></div>
+</section>
+
+<!-- MODAL -->
+<div class="backdrop" id="backdrop" role="dialog" aria-modal="true" aria-label="Projekt részletei">
+  <div class="modal" id="modalBox">
+
+    <!-- Split nézet -->
+    <div id="splitView">
+      <div class="m-img-panel" id="mImgPanel">
+        <div class="m-img-nav">
+          <button onclick="mPrev()" aria-label="Előző kép">&#8592;</button>
+          <button onclick="mNext()" aria-label="Következő kép">&#8594;</button>
+        </div>
+        <div class="m-dots" id="mDots"></div>
+        <button class="m-expand" onclick="openLb()" aria-label="Teljes kép">&#8663;</button>
+      </div>
+      <div class="m-info">
+        <button class="m-close" onclick="closeModal()" aria-label="Bezárás">&times;</button>
+        <div class="m-cat-row">
+          <span class="m-cat-dot"></span>
+          <span class="m-cat-lbl" id="mCat"></span>
+          <span class="m-year" id="mYear"></span>
+        </div>
+        <h3 class="m-title" id="mTitle"></h3>
+        <p  class="m-desc"  id="mDesc"></p>
+        <div class="m-meta"  id="mMeta"></div>
+        <div class="m-thumbs" id="mThumbs"></div>
+        <div class="m-footer">
+          <div id="mPdfWrap"></div>
+          <div class="m-nav-btns">
+            <button onclick="prevProj()" aria-label="Előző projekt">&#8592; Előző</button>
+            <button onclick="nextProj()" aria-label="Következő projekt">Következő &#8594;</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Galéria nézet -->
+    <div id="lbView">
+      <div class="lb-img-wrap" id="lbWrap">
+        <div class="lb-nav">
+          <button onclick="lbPrev()" aria-label="Előző kép">&#8592;</button>
+          <button onclick="lbNext()" aria-label="Következő kép">&#8594;</button>
+        </div>
+      </div>
+      <div class="lb-bar">
+        <button class="lb-back" onclick="closeLb()">&#8592; Vissza</button>
+        <div class="lb-dots" id="lbDots"></div>
+        <span class="lb-counter" id="lbCount"></span>
+      </div>
+    </div>
+
+    <!-- PDF nézet -->
+    <div id="pdfView">
+      <div class="pdf-hdr">
+        <div class="pdf-hdr-left">
+          <button class="pdf-back" onclick="closePdf()">&#8592; Vissza</button>
+          <span class="pdf-fname" id="pdfName"></span>
+        </div>
+        <a class="pdf-dl" id="pdfDl" download>&#8595; Letöltés</a>
+      </div>
+      <div class="pdf-frame-wrap">
+        <iframe id="pdfFrame" title="Projekt PDF"></iframe>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- RÓLAM -->
+<section class="sec-rolam" id="rolam">
+  <div class="rolam-inner">
+    <div>
+      <p class="rolam-eye">Rólam</p>
+      <h2 class="rolam-heading"><em>Helyek,</em><br>amelyek számítanak</h2>
+      <div class="rolam-body">
+        <p>Harmadéves építész mérnök hallgató vagyok az Óbudai Egyetem Ybl Miklós Építéstudományi Karán. Munkáimban a természetes anyagok, a fény és az emberléptékű terek iránt érzett szenvedélyem jelenik meg.</p>
+        <p>Projektjeim során ArchiCAD-del, Twinmotionnel és kézi rajzokkal dolgozom – hiszek abban, hogy a kéz és a digitális eszköz együtt hozza ki a legjobb tervet.</p>
+        <p>Jelenleg különösen a lakóépületek és közösségi terek tervezése érdekel.</p>
+      </div>
+      <div class="rolam-tags">
+        <span class="rolam-tag">ArchiCAD</span>
+        <span class="rolam-tag">Twinmotion</span>
+        <span class="rolam-tag">Kézi rajz</span>
+        <span class="rolam-tag">Makett készítés</span>
+        <span class="rolam-tag">ProCreate</span>
+        <span class="rolam-tag">Adobe Photosgop</span>
+      </div>
+    </div>
+    <div>
+      <img class="rolam-photo" src="assets/foto_v3.png" alt="Németh Anna portréfotó"
+           loading="lazy"
+           onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+      <div class="rolam-photo-ph" style="display:none"></div>
+    </div>
+  </div>
+</section>
+
+<!-- KAPCSOLAT -->
+<section class="sec-kapcsolat" id="kapcsolat">
+  <p class="kap-eye">Kapcsolat</p>
+  <h2 class="kap-heading">Dolgozzunk együtt</h2>
+  <a class="kap-email" href="mailto:nemeth.anna0310@gmail.com">nemeth.anna0310@gmail.com</a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span class="ft-copy">© 2026 Németh Anna</span>
+  <span class="ft-sub">Építész mérnök hallgató, Ybl Miklós Építéstudományi Kar</span>
+</footer>
+
+<script>
+// ── Adatok ──────────────────────────────────────────────────────────────────
+const PROJECTS = [
+  {
+    id: 1,
+    title: "Kápolna, Digitális Tanya - Négyszállási iskola, Jászberény",
+    hidden: false,
+    year: "2026",
+    cats: ["Stúdióterv","Látványterv","Rajz","Plakát"],
+    type: "Közösségi épület",
+    desc: "A projekt egy digitális tanyán elhelyezkedő kápolna tervezési feladatát dolgozta fel. A tér és a szakralitás viszonyát, a természeti környezethez való illeszkedést vizsgálta. A tervezési folyamat során ArchiCAD, Twinmotion és kézi rajz eszközök egyaránt szerepet kaptak.",
+    tools: "ArchiCAD, Twinmotion, Adobe Photoshop",
+    semester: "2025/26 tavasz",
+    thumb: "assets/projekt1_thumb.png",
+    fp: "center",
+    imgs: [
+      "assets/projekt1_thumb.png","assets/projekt1_1.png","assets/projekt1_2.png",
+      "assets/projekt1_3.png","assets/projekt1_4.png","assets/projekt1_5.png",
+      "assets/projekt1_6.png","assets/projekt1_7.png","assets/projekt1_8.png",
+      "assets/projekt1_9.png","assets/projekt1_10.png", "assets/projekt1_tablo.png"
+    ],
+    pdf: [
+      {name: "Tervdokumentáció", src: "assets/projekt1_terv.pdf"},
+      {name: "Plakát", src: "assets/projekt1_plakat.pdf"},
+    ]
+  },
+  {
+    id: 2,
+    title: "The Science Stack - Népsziget",
+    hidden: false,
+    year: "2025",
+    cats: ["Látványterv", "Stúdióterv", "Plakát"],
+    type: "Közösségi épület, Urbanisztika",
+    desc: "Közösségi és urbanisztikai szemléletet ötvöző látványtervek sorozata. A projekt célja egy városi tér újragondolása volt Twinmotion segítségével, hangsúlyt fektetve a közösségi funkciókra és a természetes megvilágításra.",
+    tools: "Twinmotion, ArchiCAD, Adobe Photoshop",
+    semester: "2024/25 tavasz",
+    thumb: "assets/projekt2_thumb.png",
+    fp: "center",
+    imgs: [
+      "assets/projekt2_thumb.png","assets/projekt2_1.png","assets/projekt2_2.png",
+      "assets/projekt2_3.png","assets/projekt2_4.png","assets/projekt2_5.png",
+      "assets/projekt2_6.png", "assets/projekt2_7.png", "assets/projekt2_8.png",
+      "assets/projekt2_9.png", "assets/projekt2_10.png", "assets/projekt2_11.png",
+      "assets/projekt2_12.png", "assets/projekt2_tablo.png"
+    ],
+    pdf: [
+      {name: "Tervdokumentáció", src: "assets/projekt2_terv.pdf"},
+      {name: "Plakát", src: "assets/projekt2_plakat.pdf"},
+    ]
+  },
+  {
+    id: 3,
+    title: "The Sweet Flow - Bajza utca, Terézváros",
+    hidden: false,
+    year: "2025",
+    cats: ["Látványterv", "Stúdióterv", "Rajz", "Makett", "Plakát"],
+    type: "Közösségi épület, Urbanisztika",
+    desc: "Közösségi és urbanisztikai szemléletet ötvöző látványtervek sorozata. A projekt célja egy városi tér újragondolása volt Twinmotion segítségével, hangsúlyt fektetve a közösségi funkciókra és a természetes megvilágításra.",
+    tools: "Twinmotion, ArchiCAD, Adobe Photoshop, Makett",
+    semester: "2024/25 tavasz",
+    thumb: "assets/projekt3_thumb.png",
+    fp: "center",
+    imgs: [
+      "assets/projekt3_thumb.png","assets/projekt3_1.png","assets/projekt3_2.png",
+      "assets/projekt3_3.png","assets/projekt3_4.png","assets/projekt3_5.png",
+      "assets/projekt3_6.png", "assets/projekt3_7.png", "assets/projekt3_8.png",
+      "assets/projekt3_9.png", "assets/projekt3_10.png", "assets/projekt3_11.png",
+      "assets/projekt3_12.png", "assets/projekt3_tablo.png"   
+    ],
+    pdf: [
+      {name: "Tervdokumentáció", src: "assets/projekt3_terv.pdf"},
+      {name: "Plakát", src: "assets/projekt3_plakat.pdf"},
+    ]
+  },
+  {
+    id: 4,
+    title: "A Breath Of Green - Lakóépület, Bajz utca",
+    hidden: false,
+    year: "2024",
+    cats: ["Stúdióterv", "Rajz", "Makett", "Plakát"],
+    type: "Lakóépület",
+    desc: "Kézi rajzok sorozata lakóépületek tervezési folyamatából. Az analóg technika lehetővé teszi a gyors ötletgenerálást és a tér közvetlen érzékelését, amit digitális eszközökkel nehezen lehet pótolni.",
+    tools: "Kézi rajz, ArchiCAD, Makett, Adobe Photoshop",
+    semester: "2023/24 tavasz",
+    thumb: "assets/projekt4_thumb.png",
+    fp: "center",
+    imgs: [
+      "assets/projekt4_thumb.png", "assets/projekt4_1.png", "assets/projekt4_2.png", "assets/projekt4_3.png",
+      "assets/projekt4_4.png", "assets/projekt4_5.png","assets/projekt4_7.png", "assets/projekt4_10.png",
+      "assets/projekt4_11.png", "assets/hero_makett.png", "assets/projekt4_tablo.png"
+    ],
+    pdf: null
+  },
+  {
+    id: 5,
+    title: "Rajzok",
+    hidden: false,
+    year: "2026-2026",
+    cats: ["Rajz"],
+    type: "Közösségi épület, Lakóépület, Belsőépítészet",
+    desc: "Fizikai makettsorozat különböző léptékű projektekhez. A makett készítés lehetővé teszi a térélmény közvetlen vizsgálatát, az anyagok és arányok valódi megértését – amit semmilyen digitális megjelenítő nem helyettesíthet teljesen.",
+    tools: "Makett",
+    semester: "2024/25 tavasz",
+    thumb: "assets/projekt5_thumb.png",
+    fp: "center",
+    imgs: [
+      "assets/projekt5_thumb.png", "assets/projekt5_1.png", "assets/projekt5_2.png", "assets/projekt5_3.png",
+    ],
+    pdf: null
+  },
+  {
+    id: 6,
+    title: "Plakátok",
+    hidden: false,
+    year: "2024",
+    cats: ["Plakát"],
+    type: "Közösségi épület",
+    desc: "Közösségi épületek plakáttal való promoválása. A plakátterv célja a projekt elterjesztése és a közösségi érdeklődés felkeltése.",
+    tools: "Plakát",
+    semester: "2023/24 tavasz",
+    thumb: "assets/projekt1_tablo.png",
+    fp: "center",
+    imgs: [
+      "assets/projekt1_tablo.png", "assets/projekt2_tablo.png", "assets/projekt3_tablo.png", "assets/projekt4_tablo.png"
+    ],
+    pdf: null
+  },
+  {
+    id: 7,
+    title: "Makettek",
+    hidden: false,
+    year: "2024",
+    cats: ["Makett"],
+    type: "Közösségi épület",
+    desc: "Közösségi épületek plakáttal való promoválása. A plakátterv célja a projekt elterjesztése és a közösségi érdeklődés felkeltése.",
+    tools: "Plakát",
+    semester: "2023/24 tavasz",
+    thumb: "assets/projekt7_thumb.png",
+    fp: "center",
+    imgs: [
+      "assets/projekt7_thumb.png", "assets/hero_makett.png", "assets/projekt3_11.png", "assets/projekt3_12.png"
+    ],
+    pdf: null
+  }
+];
+
+// ── State ─────────────────────────────────────────────────────────────────
+let curProj = 0;
+let curImg  = 0;
+
+// ── Kártyák renderelése ──────────────────────────────────────────────────
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('vis'); observer.unobserve(e.target); }
+  });
+}, { threshold: 0.08 });
+
+function renderCards(filter) {
+  const grid = document.getElementById('grid');
+  grid.innerHTML = '';
+  const list = filter === 'minden'
+  ? PROJECTS.filter(p => !p.hidden)
+  : PROJECTS.filter(p => !p.hidden && p.cats.includes(filter));
+
+  list.forEach(p => {
+    const card = document.createElement('div');
+    card.className = 'card';
+
+    const badge = (p.pdf && p.pdf.length) ? '<div class="card-pdf-badge">PDF<div>' : '';
+    card.innerHTML = `
+      <div class="card-img-wrap" id="cw-${p.id}">
+        <img class="card-img" src="${p.thumb}" alt="${p.title}" loading="lazy"
+             style="object-position:${p.fp}"
+             onerror="document.getElementById('cw-${p.id}').classList.add('no-img');this.remove()">
+        ${badge}
+        <div class="card-overlay">
+          <div class="card-ov-cat">${p.cats[0]}</div>
+          <div class="card-ov-title">${p.title}</div>
+        </div>
+      </div>`;
+
+    card.addEventListener('click', () => openModal(PROJECTS.indexOf(p)));
+    grid.appendChild(card);
+    observer.observe(card);
+  });
+}
+
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    renderCards(btn.dataset.f);
+  });
+});
+
+// ── Modal ────────────────────────────────────────────────────────────────
+function openModal(idx) {
+  curProj = idx; curImg = 0;
+  populate(PROJECTS[idx]);
+  document.getElementById('backdrop').classList.add('open');
+  document.body.style.overflow = 'hidden';
+  showSplit();
+}
+
+function closeModal() {
+  document.getElementById('backdrop').classList.remove('open');
+  document.body.style.overflow = '';
+  document.getElementById('pdfFrame').src = '';
+}
+
+function showSplit() {
+  document.getElementById('splitView').style.display = 'grid';
+  document.getElementById('lbView').style.display   = 'none';
+  document.getElementById('pdfView').style.display  = 'none';
+}
+
+function populate(p) {
+  setMainImg(p, 0);
+  document.getElementById('mCat').textContent   = p.cats[0];
+  document.getElementById('mYear').textContent  = p.year;
+  document.getElementById('mTitle').textContent = p.title;
+
+  const descEl = document.getElementById('mDesc');
+  descEl.innerHTML = (p.pdf && p.pdf.length)
+    ? p.desc + ` <span class="m-pdf-inline" onclick="openPdf('${p.pdf[0].src}')">&#128196; PDF-ben elérhető</span>`
+    : p.desc;
+
+  const metaEl = document.getElementById('mMeta');
+  const metas  = [
+    { l:'Eszközök', v: p.tools },
+    { l:'Típus',    v: p.type  },
+    ...(p.semester ? [{ l:'Félév', v: p.semester }] : [])
+  ];
+  metaEl.innerHTML = metas.map(m =>
+    `<div class="m-meta-item"><label>${m.l}</label><span>${m.v}</span></div>`
+  ).join('');
+
+  // Thumbs
+  const tEl = document.getElementById('mThumbs');
+  tEl.innerHTML = '';
+  p.imgs.forEach((src, i) => {
+    const img = document.createElement('img');
+    img.className = 'm-thumb' + (i === 0 ? ' act' : '');
+    img.src = src; img.alt = `${p.title} – ${i+1}.`; img.loading = 'lazy';
+    img.onerror = () => img.style.opacity = '0.15';
+    img.addEventListener('click', () => { curImg = i; setMainImg(p, i); openLb(); });
+    tEl.appendChild(img);
+  });
+
+  renderDots(p.imgs.length, 0, 'mDots', 'm-dot', i => {
+    curImg = i; setMainImg(p, i);
+  });
+
+  const pdfWrap = document.getElementById('mPdfWrap');
+  pdfWrap.innerHTML = (p.pdf && p.pdf.length)
+    ? p.pdf.map(f =>
+      `<button class="m-pdf-btn" onclick="openPdf('${f.src}')">${f.name}</button>`
+    ).join('')
+    : '';
+}
+
+function setMainImg(p, idx) {
+  const panel = document.getElementById('mImgPanel');
+  panel.querySelector('.m-main-img')?.remove();
+  panel.querySelector('.m-img-ph')?.remove();
+
+  if (p.imgs[idx]) {
+    const img = document.createElement('img');
+    img.className = 'm-main-img';
+    img.src = p.imgs[idx]; img.alt = `${p.title} – ${idx+1}.`; img.loading = 'lazy';
+    img.onerror = () => { img.remove(); insertPh(panel, 'm-img-ph'); };
+    panel.prepend(img);
+  } else {
+    insertPh(panel, 'm-img-ph');
+  }
+
+  document.querySelectorAll('.m-thumb').forEach((t,i) => t.classList.toggle('act', i===idx));
+  renderDots(p.imgs.length, idx, 'mDots', 'm-dot', i => { curImg=i; setMainImg(p,i); });
+}
+
+function insertPh(parent, cls) {
+  const d = document.createElement('div'); d.className = cls; parent.prepend(d);
+}
+
+function renderDots(count, active, containerId, cls, onClick) {
+  const el = document.getElementById(containerId);
+  el.innerHTML = '';
+  for (let i = 0; i < count; i++) {
+    const d = document.createElement('div');
+    d.className = cls + (i === active ? ' act' : '');
+    d.addEventListener('click', () => onClick(i));
+    el.appendChild(d);
+  }
+}
+
+function mPrev() {
+  const p = PROJECTS[curProj];
+  curImg = (curImg - 1 + p.imgs.length) % p.imgs.length;
+  setMainImg(p, curImg);
+  if (isLbOpen()) updateLb(p, curImg);
+}
+function mNext() {
+  const p = PROJECTS[curProj];
+  curImg = (curImg + 1) % p.imgs.length;
+  setMainImg(p, curImg);
+  if (isLbOpen()) updateLb(p, curImg);
+}
+
+function prevProj() { curProj = (curProj - 1 + PROJECTS.length) % PROJECTS.length; curImg = 0; populate(PROJECTS[curProj]); showSplit(); }
+function nextProj() { curProj = (curProj + 1) % PROJECTS.length; curImg = 0; populate(PROJECTS[curProj]); showSplit(); }
+
+// ── Lightbox ─────────────────────────────────────────────────────────────
+function isLbOpen() { return document.getElementById('lbView').style.display === 'flex'; }
+
+function openLb() {
+  document.getElementById('splitView').style.display = 'none';
+  document.getElementById('lbView').style.display    = 'flex';
+  updateLb(PROJECTS[curProj], curImg);
+}
+function closeLb() {
+  document.getElementById('lbView').style.display    = 'none';
+  document.getElementById('splitView').style.display = 'grid';
+}
+
+function updateLb(p, idx) {
+  const wrap = document.getElementById('lbWrap');
+  wrap.querySelector('.lb-main-img')?.remove();
+  wrap.querySelector('.lb-img-ph')?.remove();
+
+  if (p.imgs[idx]) {
+    const img = document.createElement('img');
+    img.className = 'lb-main-img';
+    img.src = p.imgs[idx]; img.alt = `${p.title} – ${idx+1}.`;
+    img.onerror = () => { img.remove(); insertPh(wrap, 'lb-img-ph'); };
+    wrap.prepend(img);
+  } else { insertPh(wrap, 'lb-img-ph'); }
+
+  renderDots(p.imgs.length, idx, 'lbDots', 'lb-dot', i => {
+    curImg = i; updateLb(p, i); setMainImg(p, i);
+  });
+  document.getElementById('lbCount').textContent =
+    String(idx+1).padStart(2,'0') + ' / ' + String(p.imgs.length).padStart(2,'0');
+}
+
+function lbPrev() {
+  const p = PROJECTS[curProj];
+  curImg = (curImg - 1 + p.imgs.length) % p.imgs.length;
+  updateLb(p, curImg); setMainImg(p, curImg);
+}
+function lbNext() {
+  const p = PROJECTS[curProj];
+  curImg = (curImg + 1) % p.imgs.length;
+  updateLb(p, curImg); setMainImg(p, curImg);
+}
+
+// ── PDF ──────────────────────────────────────────────────────────────────
+function openPdf(src) {
+  document.getElementById('splitView').style.display = 'none';
+  document.getElementById('lbView').style.display    = 'none';
+  document.getElementById('pdfView').style.display   = 'flex';
+  document.getElementById('pdfFrame').src = src;
+  document.getElementById('pdfName').textContent = src.split('/').pop();
+  document.getElementById('pdfDl').href = src;
+}
+function closePdf() {
+  document.getElementById('pdfView').style.display   = 'none';
+  document.getElementById('splitView').style.display = 'grid';
+}
+
+// ── Backdrop / ESC / Keys ─────────────────────────────────────────────────
+document.getElementById('backdrop').addEventListener('click', e => {
+  if (e.target === document.getElementById('backdrop')) closeModal();
+});
+document.addEventListener('keydown', e => {
+  if (!document.getElementById('backdrop').classList.contains('open')) return;
+  if (e.key === 'Escape')      closeModal();
+  if (e.key === 'ArrowLeft')  isLbOpen() ? lbPrev() : mPrev();
+  if (e.key === 'ArrowRight') isLbOpen() ? lbNext() : mNext();
+});
+
+// ── Nav hide/show on scroll ───────────────────────────────────────────────
+let lastY = 0;
+const navEl = document.getElementById('mainNav');
+window.addEventListener('scroll', () => {
+  const y = window.scrollY;
+  navEl.classList.toggle('hidden', y > lastY && y > 80);
+  lastY = y;
+}, { passive: true });
+
+// ── Hamburger ────────────────────────────────────────────────────────────
+document.getElementById('hamburger').addEventListener('click', () => {
+  document.getElementById('mobileMenu').classList.toggle('open');
+});
+function closeMM() { document.getElementById('mobileMenu').classList.remove('open'); }
+
+// ── Init ─────────────────────────────────────────────────────────────────
+renderCards('minden');
+</script>
+</body>
+</html>
