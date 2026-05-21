@@ -469,7 +469,7 @@
     }
     .rolam-photo {
       width: 100%; aspect-ratio: 3/4;
-      object-fit: cover; object-position: center;
+      object-fit: cover; object-position: center top;
     }
     .rolam-photo-ph { width: 100%; aspect-ratio: 3/4; background: #3c3c3c; }
 
@@ -485,6 +485,10 @@
       font-family: 'Cormorant Garamond', serif;
       font-style: italic; font-size: 46px; font-weight: 300;
       color: var(--grafit); margin-bottom: 32px; line-height: 1.1;
+    }
+    .kap_sub {
+      font-size: 14px; font-weight: 300; color: var(--muted);
+      margin-bottom: 32px; line-height: 1.8;
     }
     .kap-email {
       font-size: 14px; font-weight: 300; color: var(--grafit);
@@ -682,6 +686,7 @@
 <section class="sec-kapcsolat" id="kapcsolat">
   <p class="kap-eye">Kapcsolat</p>
   <h2 class="kap-heading">Dolgozzunk együtt</h2>
+  <p class="kap_sub">Nyitott vagyok szakmai együttműködésekre, tervezési feladatokra és gyakornoki lehetőségekre.</p>
   <a class="kap-email" href="mailto:nemeth.anna0310@gmail.com">nemeth.anna0310@gmail.com</a>
 </section>
 
@@ -767,13 +772,13 @@ const PROJECTS = [
   },
   {
     id: 4,
-    title: "A Breath Of Green - Lakóépület, Bajz utca",
+    title: "A Breath Of Green - Veres Pálné utca, Lakóépület",
     hidden: false,
     year: "2024",
     cats: ["Stúdióterv", "Rajz", "Makett", "Plakát"],
     type: "Lakóépület",
-    desc: "Kézi rajzok sorozata lakóépületek tervezési folyamatából. Az analóg technika lehetővé teszi a gyors ötletgenerálást és a tér közvetlen érzékelését, amit digitális eszközökkel nehezen lehet pótolni.",
-    tools: "Kézi rajz, ArchiCAD, Makett, Adobe Photoshop",
+    desc: "A Breath of Green egy belvárosi lakóépület-terv, amely a Veres Pálné utca adottságaira reagál. A koncepció középpontjában a természet behozatala áll a városba – a forma, az anyag és a zöldfelületek együtt alkotják az épület karakterét.",
+    tools: "ArchiCAD, Adobe Photoshop, Kézi rajz, Makett",
     semester: "2023/24 tavasz",
     thumb: "assets/projekt4_thumb.png",
     fp: "center",
@@ -790,9 +795,9 @@ const PROJECTS = [
     hidden: false,
     year: "2026-2026",
     cats: ["Rajz"],
-    type: "Közösségi épület, Lakóépület, Belsőépítészet",
-    desc: "Fizikai makettsorozat különböző léptékű projektekhez. A makett készítés lehetővé teszi a térélmény közvetlen vizsgálatát, az anyagok és arányok valódi megértését – amit semmilyen digitális megjelenítő nem helyettesíthet teljesen.",
-    tools: "Makett",
+    type: "Rajz",
+    desc: "Kézi rajzok sorozata lakóépületek tervezési folyamatából. Az analóg technika lehetővé teszi a gyors ötletgenerálást és a tér közvetlen érzékelését, amit digitális eszközökkel nehezen lehet pótolni.",
+    tools: "Kézi rajz",
     semester: "2024/25 tavasz",
     thumb: "assets/projekt5_thumb.png",
     fp: "center",
@@ -807,9 +812,9 @@ const PROJECTS = [
     hidden: false,
     year: "2024",
     cats: ["Plakát"],
-    type: "Közösségi épület",
+    type: "Plakát",
     desc: "Közösségi épületek plakáttal való promoválása. A plakátterv célja a projekt elterjesztése és a közösségi érdeklődés felkeltése.",
-    tools: "Plakát",
+    tools: ["Adobe Photoshop", "Twinmotion", "ArchiCAD"],
     semester: "2023/24 tavasz",
     thumb: "assets/projekt1_tablo.png",
     fp: "center",
@@ -825,8 +830,8 @@ const PROJECTS = [
     year: "2024",
     cats: ["Makett"],
     type: "Közösségi épület",
-    desc: "Közösségi épületek plakáttal való promoválása. A plakátterv célja a projekt elterjesztése és a közösségi érdeklődés felkeltése.",
-    tools: "Plakát",
+    desc: "Fizikai makettsorozat különböző léptékű projektekhez. A makett készítés lehetővé teszi a térélmény közvetlen vizsgálatát, az anyagok és arányok valódi megértését – amit semmilyen digitális megjelenítő nem helyettesíthet teljesen.",
+    tools: "Makett",
     semester: "2023/24 tavasz",
     thumb: "assets/projekt7_thumb.png",
     fp: "center",
