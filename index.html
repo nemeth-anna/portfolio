@@ -514,8 +514,10 @@
     /* ── Responsive ── */
     @media (max-width: 900px) {
       .masonry { column-count: 2; }
-      #splitView { grid-template-columns: 1fr; height: auto; max-height: none; }
-      .m-img-panel { height: 280px; }
+      .modal { max-height: 95vh; display: flex; flex-direction: column; overflow: hidden; }
+      #splitView { display: flex; flex-direction: column; flex: 1; min-height: 0; }
+      .m-img-panel { height: 280px; flex-shrink: 0; }
+      .m-info { flex: 1; min-height: 0; height: auto; }
       .rolam-inner { grid-template-columns: 1fr; gap: 40px; }
       #lbView, #pdfView { height: 80vh; }
     }
@@ -527,8 +529,8 @@
       .nav-links { display: none; }
       .nav-hamburger { display: flex; }
       .sec-header { flex-direction: column; align-items: flex-start; }
-      .modal { max-height: 95vh; }
-footer { flex-direction: column; gap: 6px; text-align: center; }
+      .m-img-panel { height: 240px; }
+      footer { flex-direction: column; gap: 6px; text-align: center; }
     }
   </style>
 </head>
