@@ -298,8 +298,13 @@
 
     .m-info {
       background: var(--hatter);
-      padding: 28px; overflow-y: auto;
+      padding: 0; overflow: hidden;
       position: relative; display: flex; flex-direction: column;
+      height: 100%;
+    }
+    .m-scroll {
+      flex: 1; min-height: 0; overflow-y: auto;
+      padding: 28px 28px 16px 28px;
     }
     .m-close {
       position: absolute; top: 14px; right: 14px;
@@ -323,7 +328,8 @@
     }
     .m-desc {
       font-size: 12px; font-weight: 300; line-height: 1.9;
-      color: var(--muted); margin-bottom: 20px; flex-grow: 1;
+      color: var(--muted); margin-bottom: 20px;
+      text-align: justify; white-space: pre-line;
     }
     .m-pdf-inline {
       color: var(--grafit); text-decoration: underline;
@@ -360,7 +366,8 @@
 
     .m-footer {
       display: flex; align-items: center; justify-content: space-between;
-      border-top: 0.5px solid var(--border); padding-top: 12px;
+      border-top: 0.5px solid var(--border); padding: 12px 28px;
+      flex-shrink: 0;
     }
     .m-pdf-btn {
       font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase;
@@ -487,8 +494,8 @@
       color: var(--grafit); margin-bottom: 32px; line-height: 1.1;
     }
     .kap_sub {
-      font-size: 14px; font-weight: 300; color: var(--muted);
-      margin-bottom: 32px; line-height: 1.8;
+      font-size: 18px; font-weight: 300; color: var(--grafit);
+      margin-bottom: 32px; line-height: 1.8; max-width: 560px; margin-left: auto; margin-right: auto;
     }
     .kap-email {
       font-size: 14px; font-weight: 300; color: var(--grafit);
@@ -521,8 +528,7 @@
       .nav-hamburger { display: flex; }
       .sec-header { flex-direction: column; align-items: flex-start; }
       .modal { max-height: 95vh; }
-      .rolam-photo, .rolam-photo-ph { aspect-ratio: 4/3; }
-      footer { flex-direction: column; gap: 6px; text-align: center; }
+footer { flex-direction: column; gap: 6px; text-align: center; }
     }
   </style>
 </head>
@@ -560,9 +566,9 @@
     </div>
   </div>
   <div class="hero-right">
-    <p class="hero-eye">Építész mérnök hallgató · Budapest</p>
+    <p class="hero-eye">Építészmérnök hallgató · Budapest</p>
     <h1 class="hero-name"><em>Németh</em><br>Anna</h1>
-    <p class="hero-tagline">Teret adni az életnek.<br>Ahol a forma találkozik az érzéssel<br>Anyag, fény, ember.</p>
+    <p class="hero-tagline">Tér. Fény. Élet.<br>Az építészet ott kezdődik,<br>ahol a forma értelmet nyer.</p>
     <a class="hero-cta" href="#projektek">
       <span class="hero-cta-line"></span>
       <span class="hero-cta-text">Munkáim</span>
@@ -602,15 +608,17 @@
       </div>
       <div class="m-info">
         <button class="m-close" onclick="closeModal()" aria-label="Bezárás">&times;</button>
-        <div class="m-cat-row">
-          <span class="m-cat-dot"></span>
-          <span class="m-cat-lbl" id="mCat"></span>
-          <span class="m-year" id="mYear"></span>
+        <div class="m-scroll">
+          <div class="m-cat-row">
+            <span class="m-cat-dot"></span>
+            <span class="m-cat-lbl" id="mCat"></span>
+            <span class="m-year" id="mYear"></span>
+          </div>
+          <h3 class="m-title" id="mTitle"></h3>
+          <p  class="m-desc"  id="mDesc"></p>
+          <div class="m-meta"  id="mMeta"></div>
+          <div class="m-thumbs" id="mThumbs"></div>
         </div>
-        <h3 class="m-title" id="mTitle"></h3>
-        <p  class="m-desc"  id="mDesc"></p>
-        <div class="m-meta"  id="mMeta"></div>
-        <div class="m-thumbs" id="mThumbs"></div>
         <div class="m-footer">
           <div id="mPdfWrap"></div>
           <div class="m-nav-btns">
@@ -658,11 +666,11 @@
   <div class="rolam-inner">
     <div>
       <p class="rolam-eye">Rólam</p>
-      <h2 class="rolam-heading"><em>Helyek,</em><br>amelyek számítanak</h2>
+      <h2 class="rolam-heading"><em>Terek,</em><br>amikben jó létezni</h2>
       <div class="rolam-body">
-        <p>Harmadéves építész mérnök hallgató vagyok az Óbudai Egyetem Ybl Miklós Építéstudományi Karán. Munkáimban a természetes anyagok, a fény és az emberléptékű terek iránt érzett szenvedélyem jelenik meg.</p>
-        <p>Projektjeim során ArchiCAD-del, Twinmotionnel és kézi rajzokkal dolgozom – hiszek abban, hogy a kéz és a digitális eszköz együtt hozza ki a legjobb tervet.</p>
-        <p>Jelenleg különösen a lakóépületek és közösségi terek tervezése érdekel.</p>
+        <p>Harmadéves építészmérnök hallgató vagyok az Óbudai Egyetem Ybl Miklós Építéstudományi Karán.</p>
+        <p>Munkáim során elsősorban ArchiCAD-del, Twinmotionnel és Photoshoppal dolgozom, de a kézi rajz és a makettezés ugyanolyan természetes része a tervezési folyamatomnak.</p>
+        <p>Tanulmányaim lakóépületek tervezéseivel indultak, majd a hangsúly fokozatosan a középületek felé tolódott. A jövőben szívesen. visszatérnék a lakóépítészethez és elmélyíteném tudásomat a belsőépítészetben is – ezek azok a területek, amelyekben a továbbiakban leginkább kibontakoznék.</p>
       </div>
       <div class="rolam-tags">
         <span class="rolam-tag">ArchiCAD</span>
@@ -670,7 +678,7 @@
         <span class="rolam-tag">Kézi rajz</span>
         <span class="rolam-tag">Makett készítés</span>
         <span class="rolam-tag">ProCreate</span>
-        <span class="rolam-tag">Adobe Photosgop</span>
+        <span class="rolam-tag">Adobe Photoshop</span>
       </div>
     </div>
     <div>
@@ -685,15 +693,14 @@
 <!-- KAPCSOLAT -->
 <section class="sec-kapcsolat" id="kapcsolat">
   <p class="kap-eye">Kapcsolat</p>
-  <h2 class="kap-heading">Dolgozzunk együtt</h2>
-  <p class="kap_sub">Nyitott vagyok szakmai együttműködésekre, tervezési feladatokra és gyakornoki lehetőségekre.</p>
+  <p class="kap_sub">Szívesen csatlakoznék egy inspiráló irodához, hogy a tanulmányaimat gyakorlati tapasztalattal egészítsem ki.</p>
   <a class="kap-email" href="mailto:nemeth.anna0310@gmail.com">nemeth.anna0310@gmail.com</a>
 </section>
 
 <!-- FOOTER -->
 <footer>
   <span class="ft-copy">© 2026 Németh Anna</span>
-  <span class="ft-sub">Építész mérnök hallgató, Ybl Miklós Építéstudományi Kar</span>
+  <span class="ft-sub">Építészmérnök hallgató, Ybl Miklós Építéstudományi Kar</span>
 </footer>
 
 <script>
@@ -701,21 +708,22 @@
 const PROJECTS = [
   {
     id: 1,
-    title: "Kápolna, Digitális Tanya - Négyszállási iskola, Jászberény",
+    title: "Synergic Spaces - Négyszállási iskola, Jászberény",
     hidden: false,
     year: "2026",
     cats: ["Stúdióterv","Látványterv","Rajz","Plakát"],
     type: "Közösségi épület",
-    desc: "A projekt egy digitális tanyán elhelyezkedő kápolna tervezési feladatát dolgozta fel. A tér és a szakralitás viszonyát, a természeti környezethez való illeszkedést vizsgálta. A tervezési folyamat során ArchiCAD, Twinmotion és kézi rajz eszközök egyaránt szerepet kaptak.",
-    tools: "ArchiCAD, Twinmotion, Adobe Photoshop",
+    desc: "A tervezés kiindulópontja az alföldi táj, a szakralitás és a tér viszonyának kutatása volt, egy tanyasi kápolna megformálásán keresztül. A kezdeti fázisban a hagyományos vidéki csűrök tömegformálását és a védett gazdasági udvarok térszervezési logikáját vizsgáltam.\nA munka előrehaladtával a funkciók köre organikusan bővült: a fókusz egy elméleti és gyakorlati alkotómunkát befogadó komplexumra helyeződött át. A tervezési kihívást a különböző zónák egyetlen koherens rendszerbe integrálása jelentette.\nA folyamat végére a koncepció egy teljes épületegyüttessé („Synergic Spaces”) érett, ahol a kápolna a közösségi és privát tereket egyensúlyozó szövet szerves részévé vált. ",
+    tools: "ArchiCAD, Twinmotion, Makett Render",
     semester: "2025/26 tavasz",
     thumb: "assets/projekt1_thumb.png",
     fp: "center",
     imgs: [
-      "assets/projekt1_thumb.png","assets/projekt1_1.png","assets/projekt1_2.png",
-      "assets/projekt1_3.png","assets/projekt1_4.png","assets/projekt1_5.png",
+      "assets/projekt1_thumb.png",
+      "assets/projekt1_5.png","assets/projekt1_4.png",
       "assets/projekt1_6.png","assets/projekt1_7.png","assets/projekt1_8.png",
-      "assets/projekt1_9.png","assets/projekt1_10.png", "assets/projekt1_tablo.png"
+      "assets/projekt1_9.png","assets/projekt1_10.png", "assets/projekt1_1.png","assets/projekt1_2.png", 
+      "assets/projekt1_11.png", "assets/projekt1_12.png", "assets/projekt1_13.png", "assets/projekt1_tablo.png"
     ],
     pdf: [
       {name: "Tervdokumentáció", src: "assets/projekt1_terv.pdf"},
@@ -728,18 +736,18 @@ const PROJECTS = [
     hidden: false,
     year: "2025",
     cats: ["Látványterv", "Stúdióterv", "Plakát"],
-    type: "Közösségi épület, Urbanisztika",
-    desc: "Közösségi és urbanisztikai szemléletet ötvöző látványtervek sorozata. A projekt célja egy városi tér újragondolása volt Twinmotion segítségével, hangsúlyt fektetve a közösségi funkciókra és a természetes megvilágításra.",
-    tools: "Twinmotion, ArchiCAD, Adobe Photoshop",
-    semester: "2024/25 tavasz",
+    type: "Közösségi épület",
+    desc: "A Népszigetre tervezett Ifjúsági Tudományos Tábor a felfedezés folyamatát modellezi. Tömegalakítása additív: a funkcionális kubusok tudás-építőkockákként rakódnak egymásra. Ezt a szigorú geometriát a szintek tengely körüli elforgatása oldja fel, amely dinamikus sziluettet hoz létre, és izgalmasan reagál a sziget természeti, illetve ipari örökségére.\nA szintek eltolása közvetlen kapcsolatot teremt a környezettel. A kilógó födémrészek teraszokként, zöldtetőkként és kilátópontokként integrálják az épületet a folyóparti tájba. Ezek a magaslati kertek a belső terek szabadtéri kiterjesztései, egyedülálló helyszínt biztosítva az oktatásnak, a kísérletezésnek és a csillagászati megfigyeléseknek.\nA belső térszervezés a transzparenciától a fokozatos intimitás felé halad. A földszint a közösségi élet nyitott tere, amelyre az elmélyült munkát szolgáló laboratóriumok és oktatótermek épülnek rá. A legfelső, legcsendesebb szint a panorámás diákszállásoké. Az épület így egy olyan inspiráló struktúra, amely formavilágával is kreatív gondolkodásra ösztönöz.",
+    tools: "Twinmotion, ArchiCAD, Adobe Photoshop, Makett Render",
+    semester: "2025/26 ősz",
     thumb: "assets/projekt2_thumb.png",
     fp: "center",
     imgs: [
-      "assets/projekt2_thumb.png","assets/projekt2_1.png","assets/projekt2_2.png",
-      "assets/projekt2_3.png","assets/projekt2_4.png","assets/projekt2_5.png",
+      "assets/projekt2_thumb.png","assets/projekt2_5.png",
       "assets/projekt2_6.png", "assets/projekt2_7.png", "assets/projekt2_8.png",
       "assets/projekt2_9.png", "assets/projekt2_10.png", "assets/projekt2_11.png",
-      "assets/projekt2_12.png", "assets/projekt2_tablo.png"
+      "assets/projekt2_12.png", "assets/projekt2_1.png","assets/projekt2_2.png",
+      "assets/projekt2_4.png", "assets/projekt2_tablo.png"
     ],
     pdf: [
       {name: "Tervdokumentáció", src: "assets/projekt2_terv.pdf"},
@@ -751,19 +759,18 @@ const PROJECTS = [
     title: "The Sweet Flow - Bajza utca, Terézváros",
     hidden: false,
     year: "2025",
-    cats: ["Látványterv", "Stúdióterv", "Rajz", "Makett", "Plakát"],
-    type: "Közösségi épület, Urbanisztika",
-    desc: "Közösségi és urbanisztikai szemléletet ötvöző látványtervek sorozata. A projekt célja egy városi tér újragondolása volt Twinmotion segítségével, hangsúlyt fektetve a közösségi funkciókra és a természetes megvilágításra.",
-    tools: "Twinmotion, ArchiCAD, Adobe Photoshop, Makett",
+    cats: ["Látványterv", "Stúdióterv", "Plakát"],
+    type: "Közösségi épület",
+    desc: "A Terézvárosban, a Szondi utca 60. szám alatti foghíjtelek beépítése egy befogadó, harmonikus középület létrehozására tesz kísérletet. A tervezés során a meglévő épületszerkezet megtartása mellett egy új, egységes tömegformálás jött létre, amely finoman illeszkedik a történelmi városszövetbe. A projekt az „A Sweet Flow” nevet kapta, célja pedig a testi-lelki feltöltődés és a minőségi emberi találkozások integrálása egyetlen térbeli keretbe.\nA belső térszervezés a különböző hangulati és használati igények tudatos elválasztására épül. A jóga- és pilates stúdiók befelé forduló, meditatív atmoszférája izgalmas kontrasztot alkot a kiegészítő funkcióként működő cukrászda nyitottabb, nyüzsgő karakterével. Ezt a kettősséget az épület visszafogott színpalettája és koherens építészeti nyelve oldja fel, egyetlen összehangolt élménnyé gyúrva a különböző funkciókat.\nA terek atmoszféráját a természetes fény és a modern, letisztult anyaghasználat határozza meg. Az utcafronti homlokzat nagyvonalú megnyitásai nemcsak a funkciók bevilágítását szolgálják, hanem hangulati elemként irányítják a térélményt. A beáramló fény finoman kiemeli a felületek textúráját, és megteremti a stúdiókban azt az egyensúlyt és nyugalmat, amely az épületet a puszta kiszolgálás helyett a minőségi „jelenlét” terévé emeli.",
+    tools: "Twinmotion, ArchiCAD, Adobe Photoshop",
     semester: "2024/25 tavasz",
     thumb: "assets/projekt3_thumb.png",
     fp: "center",
     imgs: [
-      "assets/projekt3_thumb.png","assets/projekt3_1.png","assets/projekt3_2.png",
-      "assets/projekt3_3.png","assets/projekt3_4.png","assets/projekt3_5.png",
+      "assets/projekt3_thumb.png","assets/projekt3_4.png","assets/projekt3_5.png",
       "assets/projekt3_6.png", "assets/projekt3_7.png", "assets/projekt3_8.png",
-      "assets/projekt3_9.png", "assets/projekt3_10.png", "assets/projekt3_11.png",
-      "assets/projekt3_12.png", "assets/projekt3_tablo.png"   
+      "assets/projekt3_9.png", "assets/projekt3_10.png", "assets/projekt3_1.png","assets/projekt3_2.png",
+      "assets/projekt3_3.png", "assets/projekt3_tablo.png"   
     ],
     pdf: [
       {name: "Tervdokumentáció", src: "assets/projekt3_terv.pdf"},
@@ -773,7 +780,7 @@ const PROJECTS = [
   {
     id: 4,
     title: "A Breath Of Green - Veres Pálné utca, Lakóépület",
-    hidden: false,
+    hidden: true,
     year: "2024",
     cats: ["Stúdióterv", "Rajz", "Makett", "Plakát"],
     type: "Lakóépület",
@@ -793,16 +800,16 @@ const PROJECTS = [
     id: 5,
     title: "Rajzok",
     hidden: false,
-    year: "2026-2026",
+    year: "2024-2026",
     cats: ["Rajz"],
     type: "Rajz",
-    desc: "Kézi rajzok sorozata lakóépületek tervezési folyamatából. Az analóg technika lehetővé teszi a gyors ötletgenerálást és a tér közvetlen érzékelését, amit digitális eszközökkel nehezen lehet pótolni.",
+    desc: "Szabadkézi rajzok sorozata. A vonal mint eszköz – megfigyelések, hangulatok, pillanatok rögzítése. Az analóg technika közvetlensége olyasmit ad vissza, amit digitálisan nehéz visszaadni.",
     tools: "Kézi rajz",
     semester: "2024/25 tavasz",
     thumb: "assets/projekt5_thumb.png",
     fp: "center",
     imgs: [
-      "assets/projekt5_thumb.png", "assets/projekt5_1.png", "assets/projekt5_2.png", "assets/projekt5_3.png",
+      "assets/projekt5_thumb.png"
     ],
     pdf: null
   },
@@ -813,7 +820,7 @@ const PROJECTS = [
     year: "2024",
     cats: ["Plakát"],
     type: "Plakát",
-    desc: "Közösségi épületek plakáttal való promoválása. A plakátterv célja a projekt elterjesztése és a közösségi érdeklődés felkeltése.",
+    desc: "Építészeti projektek grafikai reprezentációi. Forma, tipográfia és kompozíció egységében kommunikálják a tervezési koncepciót.",
     tools: ["Adobe Photoshop", "Twinmotion", "ArchiCAD"],
     semester: "2023/24 tavasz",
     thumb: "assets/projekt1_tablo.png",
@@ -826,7 +833,7 @@ const PROJECTS = [
   {
     id: 7,
     title: "Makettek",
-    hidden: false,
+    hidden: true,
     year: "2024",
     cats: ["Makett"],
     type: "Közösségi épület",
