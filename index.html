@@ -852,6 +852,7 @@ const PROJECTS = [
 ];
 
 // ── State ─────────────────────────────────────────────────────────────────
+const VISIBLE = PROJECTS.filter(p => !p.hidden);
 let curProj = 0;
 let curImg  = 0;
 
@@ -915,8 +916,10 @@ function closeModal() {
   document.getElementById('pdfFrame').src = '';
 }
 
+function splitDisplay() { return window.innerWidth <= 900 ? 'flex' : 'grid'; }
+
 function showSplit() {
-  document.getElementById('splitView').style.display = 'grid';
+  document.getElementById('splitView').style.display = splitDisplay();
   document.getElementById('lbView').style.display   = 'none';
   document.getElementById('pdfView').style.display  = 'none';
 }
@@ -1013,8 +1016,16 @@ function mNext() {
   if (isLbOpen()) updateLb(p, curImg);
 }
 
-function prevProj() { curProj = (curProj - 1 + PROJECTS.length) % PROJECTS.length; curImg = 0; populate(PROJECTS[curProj]); showSplit(); }
-function nextProj() { curProj = (curProj + 1) % PROJECTS.length; curImg = 0; populate(PROJECTS[curProj]); showSplit(); }
+function prevProj() {
+  const vi = VISIBLE.findIndex(p => p === PROJECTS[curProj]);
+  const prev = VISIBLE[(vi - 1 + VISIBLE.length) % VISIBLE.length];
+  curProj = PROJECTS.indexOf(prev); curImg = 0; populate(PROJECTS[curProj]); showSplit();
+}
+function nextProj() {
+  const vi = VISIBLE.findIndex(p => p === PROJECTS[curProj]);
+  const next = VISIBLE[(vi + 1) % VISIBLE.length];
+  curProj = PROJECTS.indexOf(next); curImg = 0; populate(PROJECTS[curProj]); showSplit();
+}
 
 // ── Lightbox ─────────────────────────────────────────────────────────────
 function isLbOpen() { return document.getElementById('lbView').style.display === 'flex'; }
@@ -1026,7 +1037,7 @@ function openLb() {
 }
 function closeLb() {
   document.getElementById('lbView').style.display    = 'none';
-  document.getElementById('splitView').style.display = 'grid';
+  document.getElementById('splitView').style.display = splitDisplay();
 }
 
 function updateLb(p, idx) {
@@ -1061,7 +1072,10 @@ function lbNext() {
 }
 
 // ── PDF ──────────────────────────────────────────────────────────────────
+function isMobile() { return window.innerWidth <= 900 || /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent); }
+
 function openPdf(src) {
+  if (isMobile()) { window.open(src, '_blank'); return; }
   document.getElementById('splitView').style.display = 'none';
   document.getElementById('lbView').style.display    = 'none';
   document.getElementById('pdfView').style.display   = 'flex';
@@ -1071,7 +1085,7 @@ function openPdf(src) {
 }
 function closePdf() {
   document.getElementById('pdfView').style.display   = 'none';
-  document.getElementById('splitView').style.display = 'grid';
+  document.getElementById('splitView').style.display = splitDisplay();
 }
 
 // ── Backdrop / ESC / Keys ─────────────────────────────────────────────────
