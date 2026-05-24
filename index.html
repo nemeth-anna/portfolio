@@ -514,12 +514,32 @@
     /* ── Responsive ── */
     @media (max-width: 900px) {
       .masonry { column-count: 2; }
-      .modal { max-height: 95vh; display: flex; flex-direction: column; overflow: hidden; }
-      #splitView { display: flex; flex-direction: column; flex: 1; min-height: 0; }
-      .m-img-panel { height: 280px; flex-shrink: 0; }
-      .m-info { flex: 1; min-height: 0; height: auto; }
+
+      /* Modal: explicit height kell, hogy a flex gyerekek fel tudják tölteni */
+      .modal {
+        height: 92vh;
+        max-height: 92vh;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+      }
+
+      /* splitView: flex oszlop, kitölti a modalt */
+      #splitView {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        overflow: hidden;
+      }
+
+      /* Kép: felső ~38% */
+      .m-img-panel { height: 38%; flex-shrink: 0; }
+
+      /* Info panel: maradék ~62%, belül scroll + footer */
+      .m-info { flex: 1; min-height: 0; height: auto; overflow: hidden; }
+
       .rolam-inner { grid-template-columns: 1fr; gap: 40px; }
-      #lbView, #pdfView { height: 80vh; }
+      #lbView, #pdfView { height: 92vh; }
     }
     @media (max-width: 640px) {
       .hero { grid-template-columns: 1fr; min-height: auto; }
@@ -529,7 +549,6 @@
       .nav-links { display: none; }
       .nav-hamburger { display: flex; }
       .sec-header { flex-direction: column; align-items: flex-start; }
-      .m-img-panel { height: 240px; }
       footer { flex-direction: column; gap: 6px; text-align: center; }
     }
   </style>
